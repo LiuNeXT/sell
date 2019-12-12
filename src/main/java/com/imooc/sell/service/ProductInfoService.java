@@ -7,4 +7,6 @@ import java.util.List;
 public interface ProductInfoService {
 
     List<ProductInfo> findByProductStatus(Integer ProductStatusId);
+
+    ProductInfo save(ProductInfo productInfo);
 }

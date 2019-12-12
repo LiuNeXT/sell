@@ -19,5 +19,10 @@ public class ProductInfoServiceImpl implements ProductInfoService {
         return productInfoService.findByProductStatus(productStatusId);
     }
 
+    @Override
+    public ProductInfo save(ProductInfo productInfo) {
+        return productInfoService.save(productInfo);
+    }
+
 
 }

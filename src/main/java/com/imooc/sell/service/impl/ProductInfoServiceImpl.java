@@ -1,6 +1,7 @@
 package com.imooc.sell.service.impl;
 
 import com.imooc.sell.dataobject.ProductInfo;
+import com.imooc.sell.enums.ProductStatusEnum;
 import com.imooc.sell.repository.ProductInfoRepository;
 import com.imooc.sell.service.ProductInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,21 @@ public class ProductInfoServiceImpl implements ProductInfoService {
     private ProductInfoRepository productInfoService;
 
     @Override
-    public List<ProductInfo> findByProductStatus(Integer productStatusId) {
-        return productInfoService.findByProductStatus(productStatusId);
+    public List<ProductInfo> findByProductStatus() {
+        return productInfoService.findByProductStatus(ProductStatusEnum.UP.getCode());
     }
+
+    @Override
+    public ProductInfo save(ProductInfo productInfo) {
+        return productInfoService.save(productInfo);
+    }
+
+//    @Override
+//    public Page<ProductInfo> findAll(org.springframework.data.domain.Pageable pageable) {
+//        return null;
+//    }
+
+
 
 
 }

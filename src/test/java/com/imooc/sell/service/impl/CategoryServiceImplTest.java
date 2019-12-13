@@ -11,8 +11,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -45,6 +43,6 @@ public class CategoryServiceImplTest {
     @Test
     public void save() {
         ProductCategory p = new ProductCategory("碎碎面",4);
-        Assert.assertNotNull(p);
+        categoryService.save(p);
     }
 }

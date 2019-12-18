@@ -32,18 +32,28 @@ public class ProductController {
 
     @GetMapping("/list")
     public ResultVO productList() throws Exception{
-        List<ProductInfoVO> productInfoVOList = new ArrayList<>();
-        List<ProductInfo> productInfoList = productService.findAll();
-        for (ProductInfo productInfo : productInfoList){
-            ProductInfoVO productInfoVO = new ProductInfoVO();
-            BeanUtils.copyProperties(productInfo,productInfoVO);
-            productInfoVOList.add(productInfoVO);
+
+        List<ProductVO> productVOList = new ArrayList<>();
+        List<ProductCategory> productCategoryList = categoryService.findAll();
+        for (ProductCategory productCategory: productCategoryList) {
+            ProductVO productVO =  new ProductVO();
+            BeanUtils.copyProperties(productCategory,productVO);
+
+            List<ProductInfoVO> productInfoVOList = new ArrayList<>();
+            List<ProductInfo> productInfoList = productService.findAll();
+
+            if (productInfoList.size() != 0){
+                for (ProductInfo productInfo : productInfoList){
+                    ProductInfoVO productInfoVO = new ProductInfoVO();
+                    BeanUtils.copyProperties(productInfo,productInfoVO);
+                    productInfoVOList.add(productInfoVO);
+                }
+            }
+
+            productVO.setProductInfoVOList(productInfoVOList);
+            productVOList.add(productVO);
         }
-        ProductCategory productCategory = categoryService.findOne(1);
-        ProductVO productVO = new ProductVO();
-        productVO.setCategoryName(productCategory.getCategoryName());
-        productVO.setCategoryType(productCategory.getCategoryType());
-        productVO.setProductInfoVOList(productInfoVOList);
-        return  ResultVOUtil.success(productVO);
+
+        return  ResultVOUtil.success(productVOList);
     }
 }

@@ -53,8 +53,11 @@
 
     <!--//输出调用-->
     <root level="info">
-        <appender-ref ref="consoleLog" />
+        <!--<appender-ref ref="consoleLog" />-->
         <appender-ref ref="fileInfoLog" />
         <appender-ref ref="fileErrorLog" />
+    </root>
+    <root level="info">
+        <appender-ref ref="consoleLog" />
     </root>
 </configuration>

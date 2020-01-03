@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 import java.util.Map;
 
 @Data
-@ConfigurationProperties(prefix = "wechat")
 @Component
+@ConfigurationProperties(prefix = "wechat")
 public class WechatAccountConfig {
 
 

@@ -4,6 +4,8 @@ import com.imooc.sell.dataobject.OrderMaster;
 import com.imooc.sell.enums.OrderStatusEnum;
 import com.imooc.sell.enums.PayStatusEnum;
 import com.imooc.sell.repository.OrderMasterRepository;
+import com.imooc.utils.JsonUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +14,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
 
-import static org.junit.Assert.*;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Slf4j
 public class OrderMasterServiceImplTest {
 
     @Autowired
@@ -37,6 +38,8 @@ public class OrderMasterServiceImplTest {
         orderMaster.setOrderAmount(new BigDecimal(5));
         orderMaster.setOrderStatus(OrderStatusEnum.NEW.getCode());
         orderMaster.setPayStatus(PayStatusEnum.SUCCESS.getCode());
+        //log.info(JSON.toJSONString(orderMaster));
+        log.info(JsonUtil.toJson(orderMaster));
         orderMasterRepository.save(orderMaster);
     }
 }

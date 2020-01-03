@@ -1,12 +1,18 @@
 package com.imooc.sell.service.impl;
 
+import com.imooc.sell.converter.OrderMaster2OrderDTOConverter;
 import com.imooc.sell.dataobject.OrderDetail;
+import com.imooc.sell.dataobject.OrderMaster;
 import com.imooc.sell.dto.OrderDTO;
+import com.imooc.sell.repository.OrderMasterRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
@@ -19,6 +25,9 @@ public class OrderServiceImplTest {
 
     @Autowired
     private  OrderServiceImpl orderService;
+
+    @Autowired
+    private OrderMasterRepository orderMasterRepository;
 
     public final String  BUYER_OPENID = "1101110";
 
@@ -51,6 +60,17 @@ public class OrderServiceImplTest {
 
     @Test
     public void findList() {
+
+        String  buyerOpenid= "ew3euwhd7sjw9diwkq";
+        PageRequest pageRequest = PageRequest.of(0,10);
+        Page<OrderMaster> orderMasterPage = orderMasterRepository.findByBuyerOpenid(buyerOpenid, pageRequest);
+        List<OrderDTO> orderDTOList = OrderMaster2OrderDTOConverter.convert(orderMasterPage.getContent());
+        PageImpl<OrderDTO> orderDTOS = new PageImpl<>(orderDTOList, pageRequest, orderMasterPage.getTotalElements());
+        System.out.println(orderDTOS.getTotalElements());
+        System.out.println(orderDTOS.getTotalPages());
+        System.out.println(orderDTOS.getContent());
+
+
     }
 
     @Test

@@ -4,13 +4,13 @@ import com.imooc.sell.dto.OrderDTO;
 import com.imooc.sell.enums.ResultEnum;
 import com.imooc.sell.exception.SellException;
 import com.imooc.sell.service.PayService;
+import com.imooc.utils.JsonUtil;
 import com.imooc.utils.MathUtil;
 import com.lly835.bestpay.enums.BestPayTypeEnum;
 import com.lly835.bestpay.model.PayRequest;
 import com.lly835.bestpay.model.PayResponse;
 import com.lly835.bestpay.model.RefundResponse;
-import com.lly835.bestpay.service.impl.BestPayServiceImpl;
-import com.lly835.bestpay.utils.JsonUtil;
+import com.lly835.bestpay.service.BestPayService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,8 @@ public class PayServiceImpl implements PayService {
     public static  final  String ORDER_NAME = "微信点餐订单";
 
 
-    BestPayServiceImpl payService = new BestPayServiceImpl();
+    @Autowired
+    private BestPayService payService;
 
     @Autowired
     private  OrderServiceImpl orderService;
